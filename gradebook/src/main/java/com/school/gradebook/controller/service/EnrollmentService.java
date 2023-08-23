@@ -20,4 +20,20 @@ public class EnrollmentService {
     public List<Enrollment> getEnrollments() {
         return enrollmentRepository.findAll();
     }
+
+    public Enrollment getEnrollmentById(Long id) {
+        return enrollmentRepository.findById(id).orElse(null);
+    }
+
+    public void addEnrollment(Enrollment enrollment) {
+        enrollmentRepository.save(enrollment);
+    }
+
+    public void updateEnrollment(Enrollment enrollment) {
+        enrollmentRepository.save(enrollment);
+    }
+
+    public void deleteEnrollment(Long id) {
+        enrollmentRepository.deleteById(id);
+    }
 }

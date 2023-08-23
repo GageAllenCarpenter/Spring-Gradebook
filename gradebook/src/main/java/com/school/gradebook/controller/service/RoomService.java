@@ -20,4 +20,20 @@ public class RoomService {
     public List<Room> getRooms() {
         return roomRepository.findAll();
     }
+
+    public Room getRoomById(Long id) {
+        return roomRepository.findById(id).orElse(null);
+    }
+
+    public void addRoom(Room room) {
+        roomRepository.save(room);
+    }
+
+    public void updateRoom(Room room) {
+        roomRepository.save(room);
+    }
+
+    public void deleteRoom(Long id) {
+        roomRepository.deleteById(id);
+    }
 }

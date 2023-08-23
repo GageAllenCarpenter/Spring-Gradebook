@@ -20,4 +20,20 @@ public class ProfessorService {
     public List<Professor> getProfessors() {
         return professorRepository.findAll();
     }
+
+    public Professor getProfessorById(Long id) {
+        return professorRepository.findById(id).orElse(null);
+    }
+
+    public void addProfessor(Professor professor) {
+        professorRepository.save(professor);
+    }
+
+    public void updateProfessor(Professor professor) {
+        professorRepository.save(professor);
+    }
+
+    public void deleteProfessor(Long id) {
+        professorRepository.deleteById(id);
+    }
 }

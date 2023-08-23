@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Division</title>
+    <title>Update Room</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <script th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
     <header>
-        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/}" alt="Apple Logo">
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
         <nav>
             <ul class="nav__links">
                 <li><a th:href="@{/assignment}">Assignments</a></li>
@@ -26,7 +26,15 @@
         <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
     </header>
     <section>
-        <h1>Division</h1>
+        <h1>Update Room</h1>
+        <form th:action="@{/room/update/{id}(id=${room.id})}" method="post">
+            <label for="building">Building:</label>
+            <select id="building" name="building" th:value="${room.building.id}" required>
+                <option th:each="building : ${buildings}" th:value="${building.id}" th:text="${building.name}"></option>
+            </select>
+            <button type="submit">Update</button>
+            <a class="cancel" th:href="@{/room}">Cancel</a>
+        </form>
     </section>
 </body>
 </html>

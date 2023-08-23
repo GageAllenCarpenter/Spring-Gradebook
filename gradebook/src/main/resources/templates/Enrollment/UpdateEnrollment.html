@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Enrollment</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Update Enrollment</h1>
+        <form th:action="@{/enrollment/update/{id}(id=${enrollment.id})}" method="post">
+            <label for="enrollDate">Enroll Date:</label>
+            <input type="date" id="enrollDate" name="enrollDate" th:value="${#dates.format(enrollment.enrollDate, 'yyyy-MM-dd')}" required>
+            <label for="currentGrade">Current Grade:</label>
+            <input type="number" id="currentGrade" name="currentGrade" th:value="${enrollment.currentGrade}" required>
+            <label for="midtermGrade">Midterm Grade:</label>
+            <input type="number" id="midtermGrade" name="midtermGrade" th:value="${enrollment.midtermGrade}" required>
+            <label for="finalGrade">Final Grade:</label>
+            <input type="number" id="finalGrade" name="finalGrade" th:value="${enrollment.finalGrade}" required>
+            <label for="division">Division:</label>
+            <select id="division" name="division" th:field="*{division}" required>
+                <option th:each="division : ${divisions}" th:value="${division}" th:text="${division.course.name + ' - ' + division.professor.firstName + ' ' + division.professor.lastName}"></option>
+            </select>
+            <label for="student">Student:</label>
+            <select id="student" name="student" th:field="*{student}" required>
+                <option th:each="student : ${students}" th:value="${student}" th:text="${student.firstName + ' ' + student.lastName}"></option>
+            </select>
+            <button type="submit">Update</button>
+            <a class="cancel" th:href="@{/enrollment}">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>

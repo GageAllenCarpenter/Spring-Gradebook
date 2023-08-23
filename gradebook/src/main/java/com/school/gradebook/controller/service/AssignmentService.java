@@ -19,4 +19,20 @@ public class AssignmentService {
     public List<Assignment> getAssignments() {
         return assignmentRepository.findAll();
     }
+
+    public Assignment getAssignmentById(Long id) {
+        return assignmentRepository.findById(id).orElse(null);
+    }
+
+    public void addAssignment(Assignment assignment) {
+        assignmentRepository.save(assignment);
+    }
+
+    public void updateAssignment(Assignment assignment) {
+        assignmentRepository.save(assignment);
+    }
+
+    public void deleteAssignment(Long id) {
+        assignmentRepository.deleteById(id);
+    }
 }

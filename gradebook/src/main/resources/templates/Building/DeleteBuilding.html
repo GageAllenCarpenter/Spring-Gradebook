@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Building</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Delete Building</h1>
+        <p>Are you sure you want to delete this building?</p>
+        <p>ID: <span th:text="${building.id}"></span></p>
+        <p>Name: <span th:text="${building.name}"></span></p>
+        <p>City: <span th:text="${building.city}"></span></p>
+        <p>State: <span th:text="${building.state}"></span></p>
+        <p>Zip Code: <span th:text="${building.zipcode}"></span></p>
+        <form th:action="@{/building/delete/{id}(id=${building.id})}" method="post">
+            <button type="submit">Delete</button>
+            <a class="cancel" th:href="@{/building}">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>

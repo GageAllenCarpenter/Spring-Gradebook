@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Building</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Buildings</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="building : ${buildings}">
+                <td th:text="${building.id}"></td>
+                <td th:text="${building.name}"></td>
+                <td th:text="${building.city}"></td>
+                <td th:text="${building.state}"></td>
+                <td th:text="${building.zipcode}"></td>
+                <td>
+                    <a th:href="@{/building/update/{id}(id=${building.id})}"><button class="update__btn">Update</button></a>
+                    <a th:href="@{/building/delete/{id}(id=${building.id})}"><button class="del__btn">Delete</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="add" th:href="@{/building/add}"><button class="add__btn">Add Building</button></a>
+    </section>
+</body>
+</html>

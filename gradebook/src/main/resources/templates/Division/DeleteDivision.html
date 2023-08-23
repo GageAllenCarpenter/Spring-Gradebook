@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Course</title>
+    <title>Delete Vision</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <script th:src="@{/javascript/script.js}"></script>
 </head>
 <body>
     <header>
-        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/}" alt="Apple Logo">
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
         <nav>
             <ul class="nav__links">
                 <li><a th:href="@{/assignment}">Assignments</a></li>
@@ -26,7 +26,18 @@
         <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
     </header>
     <section>
-        <h1>Course</h1>
+        <h1>Delete Division</h1>
+        <p>Are you sure you want to delete this division?</p>
+        <p>ID: <span th:text="${division.id}"></span></p>
+        <p>Time: <span th:text="${division.time}"></span></p>
+        <p>Professor: <span th:text="${division.professor.firstName} ${division.professor.lastName}"></span></p>
+        <p>Semester: <span th:text="${division.semester.startDate} - ${division.semester.endDate}"></span></p>
+        <p>Course: <span th:text="${division.course.name}"></span></p>
+        <p>Room: <span th:text="${division.room.id}"></span></p>
+        <form th:action="@{/division/delete/{id}(id=${division.id})}" method="post">
+            <button type="submit">Delete</button>
+            <a class="cancel" th:href="@{/division}">Cancel</a>
+        </form>
     </section>
 </body>
 </html>

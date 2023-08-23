@@ -17,6 +17,6 @@ public class Room {
     @Column(name = "id")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "building_id") // Change to match the column name in the database
-    private Building building; // Update the name of the building entity reference
+    @JoinColumn(name = "building_id")
+    private Building building;
 }

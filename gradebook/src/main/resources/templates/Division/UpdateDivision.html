@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Division</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Update Division</h1>
+        <form th:action="@{/division/update/{id}(id=${division.id})}" method="post">
+            <label for="time">Time:</label>
+            <input type="text" id="time" name="time" th:value="${division.time}" required>
+            <label for="professor">Professor:</label>
+            <select id="professor" name="professor" th:field="*{professor}" required>
+                <option th:each="professor : ${professors}" th:value="${professor}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
+            </select>
+            <label for="semester">Semester:</label>
+            <select id="semester" name="semester" th:field="*{semester}" required>
+                <option th:each="semester : ${semesters}" th:value="${semester}" th:text="${semester.startDate + ' - ' + semester.endDate}"></option>
+            </select>
+            <label for="course">Course:</label>
+            <select id="course" name="course" th:field="*{course}" required>
+                <option th:each="course : ${courses}" th:value="${course}" th:text="${course.name}"></option>
+            </select>
+            <label for="room">Room:</label>
+            <select id="room" name="room" th:field="*{room}" required>
+                <option th:each="room : ${rooms}" th:value="${room}" th:text="${room.building.name + ' - Room ' + room.id}"></option>
+            </select>
+            <button type="submit">Update</button>
+            <a class="cancel" th:href="@{/division}">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>

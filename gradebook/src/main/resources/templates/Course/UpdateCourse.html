@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Course</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Update Course</h1>
+        <form th:action="@{/course/update/{id}(id=${course.id})}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="${course.name}" required>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:value="${course.description}" required>
+            <label for="creditHour">Credit Hour:</label>
+            <input type="number" id="creditHour" name="creditHour" th:value="${course.creditHour}" required>
+            <label for="professor">Professor:</label>
+            <select id="professor" name="professor" th:field="*{professor}" required>
+                <option th:each="professor : ${professors}" th:value="${professor}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
+            </select>
+            <button type="submit">Update</button>
+            <a class="cancel" th:href="@{/course}">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>

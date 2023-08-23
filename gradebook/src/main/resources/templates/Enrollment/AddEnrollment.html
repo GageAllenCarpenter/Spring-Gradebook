@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Enrollment</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Add Enrollment</h1>
+        <form th:action="@{/enrollment/add}" method="post" th:object="${enrollment}">
+            <label for="enrollDate">Enrollment Date:</label>
+            <input type="date" id="enrollDate" name="enrollDate" th:field="*{enrollDate}" required><br>
+            <label for="currentGrade">Current Grade:</label>
+            <input type="number" id="currentGrade" name="currentGrade" th:field="*{currentGrade}" required><br>
+            <label for="midtermGrade">Midterm Grade:</label>
+            <input type="number" id="midtermGrade" name="midtermGrade" th:field="*{midtermGrade}" required><br>
+            <label for="finalGrade">Final Grade:</label>
+            <input type="number" id="finalGrade" name="finalGrade" th:field="*{finalGrade}" required><br>
+            <!-- Add the division selection dropdown here -->
+            <!-- Add the student selection dropdown here -->
+            <button type="submit">Add Enrollment</button>
+        </form>
+        <a class="cancel" href="/enrollment">Cancel</a>
+    </section>
+</body>
+</html>

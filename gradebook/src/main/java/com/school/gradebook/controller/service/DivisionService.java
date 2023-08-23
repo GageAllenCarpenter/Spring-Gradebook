@@ -19,4 +19,20 @@ public class DivisionService {
     public List<Division> getDivisions() {
         return divisionRepository.findAll();
     }
+
+    public Division getDivisionById(Long id) {
+        return divisionRepository.findById(id).orElse(null);
+    }
+
+    public void addDivision(Division division) {
+        divisionRepository.save(division);
+    }
+
+    public void updateDivision(Division division) {
+        divisionRepository.save(division);
+    }
+
+    public void deleteDivision(Long id) {
+        divisionRepository.deleteById(id);
+    }
 }

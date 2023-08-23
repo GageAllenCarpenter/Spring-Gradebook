@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Professor</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Delete Professor</h1>
+        <p>Are you sure you want to delete this professor?</p>
+        <p>ID: <span th:text="${professor.id}"></span></p>
+        <p>First Name: <span th:text="${professor.firstName}"></span></p>
+        <p>Last Name: <span th:text="${professor.lastName}"></span></p>
+        <p>Email: <span th:text="${professor.email}"></span></p>
+        <p>Phone Number: <span th:text="${professor.phoneNumber}"></span></p>
+        <p>Address: <span th:text="${professor.address}"></span></p>
+        <form th:action="@{/professor/delete/{id}(id=${professor.id})}" method="post">
+            <button type="submit">Delete</button>
+            <a class="cancel" th:href="@{/professor}">Cancel</a>
+        </form>
+    </section>
+</body>
+</html>

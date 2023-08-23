@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/javascript/script.js}"></script>
+</head>
+<body>
+    <header>
+        <img class="logo" th:src="@{/images/Apple.png}" th:href="@{/static}" alt="Apple Logo">
+        <nav>
+            <ul class="nav__links">
+                <li><a th:href="@{/assignment}">Assignments</a></li>
+                <li><a th:href="@{/building}">Buildings</a></li>
+                <li><a th:href="@{/course}">Courses</a></li>
+                <li><a th:href="@{/division}">Divisions</a></li>
+                <li><a th:href="@{/enrollment}">Enrollment</a></li>
+                <li><a th:href="@{/grade}">Grades</a></li>
+                <li><a th:href="@{/professor}">Professors</a></li>
+                <li><a th:href="@{/room}">Rooms</a></li>
+                <li><a th:href="@{/semester}">Semesters</a></li>
+                <li><a th:href="@{/student}">Students</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="https://www.linkedin.com/in/gage-carpenter-07750a174/"><button>Login</button></a>
+    </header>
+    <section>
+        <h1>Grades</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Points</th>
+                <th>Assignment</th>
+                <th>Division</th>
+                <th>Student</th>
+                <th>Professor</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="grade : ${grades}">
+                <td th:text="${grade.id}"></td>
+                <td th:text="${grade.points}"></td>
+                <td th:text="${grade.assignment.name}"></td>
+                <td th:text="${grade.division.id}"></td>
+                <td th:text="${grade.student}"></td>
+                <td th:text="${grade.professor}"></td>
+                <td>
+                    <a th:href="@{/grade/update/{id}(id=${grade.id})}"><button class="update__btn">Update</button></a>
+                    <a th:href="@{/grade/delete/{id}(id=${grade.id})}"><button class="del__btn">Delete</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="add" th:href="@{/grade/add}"><button class="add__btn">Add Grade</button></a>
+    </section>
+</body>
+</html>

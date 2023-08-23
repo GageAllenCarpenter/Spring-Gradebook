@@ -20,4 +20,20 @@ public class SemesterService {
     public List<Semester> getSemesters() {
         return semesterRepository.findAll();
     }
+
+    public Semester getSemesterById(Long id) {
+        return semesterRepository.findById(id).orElse(null);
+    }
+
+    public void addSemester(Semester semester) {
+        semesterRepository.save(semester);
+    }
+
+    public void updateSemester(Semester semester) {
+        semesterRepository.save(semester);
+    }
+
+    public void deleteSemester(Long id) {
+        semesterRepository.deleteById(id);
+    }
 }
