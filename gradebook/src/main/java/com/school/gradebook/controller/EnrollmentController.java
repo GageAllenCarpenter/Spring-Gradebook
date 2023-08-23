@@ -1,6 +1,8 @@
 package com.school.gradebook.controller;
 
+import com.school.gradebook.controller.service.DivisionService;
 import com.school.gradebook.controller.service.EnrollmentService;
+import com.school.gradebook.controller.service.StudentService;
 import com.school.gradebook.model.Enrollment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +13,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/enrollment")
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
+    private final DivisionService divisionService;
+    private final StudentService studentService;
     @Autowired
-    public EnrollmentController(EnrollmentService enrollmentService) {
+    public EnrollmentController(
+            EnrollmentService enrollmentService,
+            DivisionService divisionService,
+            StudentService studentService
+    ) {
         this.enrollmentService = enrollmentService;
+        this.divisionService = divisionService;
+        this.studentService = studentService;
     }
 
     @GetMapping
@@ -25,17 +35,27 @@ public class EnrollmentController {
     @GetMapping("/add")
     public String showAddEnrollmentForm(Model model) {
         model.addAttribute("enrollment", new Enrollment());
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
         return "Enrollment/AddEnrollment";
     }
 
     @PostMapping("/add")
-    public String addEnrollment(@ModelAttribute Enrollment enrollment) {
+    public String addEnrollment(
+            @ModelAttribute Enrollment enrollment,
+            @RequestParam("divisionId") Long divisionId,
+            @RequestParam("studentId") Long studentId
+    ) {
+        enrollment.setDivision(divisionService.getDivisionById(divisionId));
+        enrollment.setStudent(studentService.getStudentById(studentId));
         enrollmentService.addEnrollment(enrollment);
         return "redirect:/enrollment";
     }
 
     @GetMapping("/update")
-    public String showUpdateEnrollmentForm() {
+    public String showUpdateEnrollmentForm(Model model) {
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
         return "Enrollment/UpdateEnrollment";
     }
 
@@ -43,6 +63,8 @@ public class EnrollmentController {
     public String showUpdateEnrollmentForm(@PathVariable Long id, Model model) {
         Enrollment enrollment = enrollmentService.getEnrollmentById(id);
         model.addAttribute("enrollment", enrollment);
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
         return "Enrollment/UpdateEnrollment";
     }
 

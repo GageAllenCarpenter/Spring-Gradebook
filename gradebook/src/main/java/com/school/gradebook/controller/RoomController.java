@@ -1,5 +1,6 @@
 package com.school.gradebook.controller;
 
+import com.school.gradebook.controller.service.BuildingService;
 import com.school.gradebook.controller.service.RoomService;
 import com.school.gradebook.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/room")
 public class RoomController {
     private final RoomService roomService;
+    private final BuildingService buildingService;
     @Autowired
-    public RoomController(RoomService roomService) {
+    public RoomController(
+            RoomService roomService,
+            BuildingService buildingService
+    ) {
         this.roomService = roomService;
+        this.buildingService = buildingService;
     }
 
     @GetMapping
@@ -25,17 +31,23 @@ public class RoomController {
     @GetMapping("/add")
     public String showAddRoomForm(Model model) {
         model.addAttribute("room", new Room());
+        model.addAttribute("buildings", buildingService.getBuildings());
         return "Room/AddRoom";
     }
 
     @PostMapping("/add")
-    public String addRoom(@ModelAttribute Room room) {
+    public String addRoom(
+            @ModelAttribute Room room,
+            @RequestParam("buildingId") Long buildingId
+    ) {
+        room.setBuilding(buildingService.getBuildingById(buildingId));
         roomService.addRoom(room);
         return "redirect:/room";
     }
 
     @GetMapping("/update")
-    public String showUpdateRoomForm() {
+    public String showUpdateRoomForm(Model model) {
+        model.addAttribute("buildings", buildingService.getBuildings());
         return "Room/UpdateRoom";
     }
 
@@ -43,6 +55,7 @@ public class RoomController {
     public String showUpdateRoomForm(@PathVariable Long id, Model model) {
         Room room = roomService.getRoomById(id);
         model.addAttribute("room", room);
+        model.addAttribute("buildings", buildingService.getBuildings());
         return "Room/UpdateRoom";
     }
 

@@ -43,10 +43,10 @@
             <tr th:each="division : ${divisions}">
                 <td th:text="${division.id}"></td>
                 <td th:text="${division.time}"></td>
-                <td th:text="${division.professor}"></td>
-                <td th:text="${division.semester}"></td>
-                <td th:text="${division.course}"></td>
-                <td th:text="${division.room}"></td>
+                <td th:text="${division.professor.firstName + ' ' + division.professor.lastName}"></td>
+                <td th:text="${division.semester.startDate + ' - ' + division.semester.endDate}"></td>
+                <td th:text="${division.course.name}"></td>
+                <td th:text="${division.room.id}"></td>
                 <td>
                     <a th:href="@{/division/update/{id}(id=${division.id})}"><button class="update__btn">Update</button></a>
                     <a th:href="@{/division/delete/{id}(id=${division.id})}"><button class="del__btn">Delete</button></a>

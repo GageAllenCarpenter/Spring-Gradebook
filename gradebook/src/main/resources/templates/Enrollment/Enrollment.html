@@ -47,8 +47,8 @@
                 <td th:text="${enrollment.currentGrade}"></td>
                 <td th:text="${enrollment.midtermGrade}"></td>
                 <td th:text="${enrollment.finalGrade}"></td>
-                <td th:text="${enrollment.division}"></td>
-                <td th:text="${enrollment.student}"></td>
+                <td th:text="${enrollment.division.id}"></td>
+                <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
                 <td>
                     <a th:href="@{/enrollment/update/{id}(id=${enrollment.id})}"><button class="update__btn">Update</button></a>
                     <a th:href="@{/enrollment/delete/{id}(id=${enrollment.id})}"><button class="del__btn">Delete</button></a>

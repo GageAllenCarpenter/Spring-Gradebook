@@ -34,7 +34,10 @@
             <input type="text" id="description" name="description" th:field="*{description}" required><br>
             <label for="creditHour">Credit Hour:</label>
             <input type="number" id="creditHour" name="creditHour" th:field="*{creditHour}" required><br>
-            <!-- Add the professor selection dropdown here -->
+            <label for="professor">Professor:</label>
+            <select id="professor" name="professorId" required>
+                <option th:each="professor : ${professors}" th:value="${professor.id}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
+            </select><br>
             <button type="submit">Add Course</button>
         </form>
         <a class="cancel" href="/course">Cancel</a>

@@ -29,7 +29,7 @@
         <h1>Update Room</h1>
         <form th:action="@{/room/update/{id}(id=${room.id})}" method="post">
             <label for="building">Building:</label>
-            <select id="building" name="building" th:value="${room.building.id}" required>
+            <select id="building" name="building.id" required>
                 <option th:each="building : ${buildings}" th:value="${building.id}" th:text="${building.name}"></option>
             </select>
             <button type="submit">Update</button>

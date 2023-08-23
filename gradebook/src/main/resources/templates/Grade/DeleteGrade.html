@@ -32,8 +32,8 @@
         <p>Points: <span th:text="${grade.points}"></span></p>
         <p>Assignment ID: <span th:text="${grade.assignment.id}"></span></p>
         <p>Division ID: <span th:text="${grade.division.id}"></span></p>
-        <p>Student: <span th:text="${grade.student.firstName} ${grade.student.lastName}"></span></p>
-        <p>Professor: <span th:text="${grade.professor.firstName} ${grade.professor.lastName}"></span></p>
+        <p>Student: <span th:text="${grade.student.firstName + ' ' + grade.student.lastName}"></span></p>
+        <p>Professor: <span th:text="${grade.professor.firstName + ' ' + grade.professor.lastName}"></span></p>
         <form th:action="@{/grade/delete/{id}(id=${grade.id})}" method="post">
             <button type="submit">Delete</button>
             <a class="cancel" th:href="@{/grade}">Cancel</a>

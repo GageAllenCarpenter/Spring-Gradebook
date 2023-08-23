@@ -34,7 +34,7 @@
         <p>Midterm Grade: <span th:text="${enrollment.midtermGrade}"></span></p>
         <p>Final Grade: <span th:text="${enrollment.finalGrade}"></span></p>
         <p>Division ID: <span th:text="${enrollment.division.id}"></span></p>
-        <p>Student: <span th:text="${enrollment.student.firstName} ${enrollment.student.lastName}"></span></p>
+        <p>Student: <span th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></span></p>
         <form th:action="@{/enrollment/delete/{id}(id=${enrollment.id})}" method="post">
             <button type="submit">Delete</button>
             <a class="cancel" th:href="@{/enrollment}">Cancel</a>

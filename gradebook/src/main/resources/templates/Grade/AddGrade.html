@@ -30,10 +30,22 @@
         <form th:action="@{/grade/add}" method="post" th:object="${grade}">
             <label for="points">Points:</label>
             <input type="number" id="points" name="points" th:field="*{points}" required><br>
-            <!-- Add the assignment selection dropdown here -->
-            <!-- Add the division selection dropdown here -->
-            <!-- Add the student selection dropdown here -->
-            <!-- Add the professor selection dropdown here -->
+            <label for="assignment">Assignment:</label>
+            <select id="assignment" name="assignmentId" required>
+                <option th:each="assignment : ${assignments}" th:value="${assignment.id}" th:text="${assignment.name}"></option>
+            </select><br>
+            <label for="division">Division:</label>
+            <select id="division" name="divisionId" required>
+                <option th:each="division : ${divisions}" th:value="${division.id}" th:text="${division.time}"></option>
+            </select><br>
+            <label for="student">Student:</label>
+            <select id="student" name="studentId" required>
+                <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"></option>
+            </select><br>
+            <label for="professor">Professor:</label>
+            <select id="professor" name="professorId" required>
+                <option th:each="professor : ${professors}" th:value="${professor.id}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
+            </select><br>
             <button type="submit">Add Grade</button>
         </form>
         <a class="cancel" href="/grade">Cancel</a>

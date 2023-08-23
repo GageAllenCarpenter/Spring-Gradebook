@@ -28,7 +28,10 @@
     <section>
         <h1>Add Room</h1>
         <form th:action="@{/room/add}" method="post" th:object="${room}">
-            <!-- Add the building selection dropdown here -->
+            <label for="building">Building:</label>
+            <select id="building" name="buildingId" required>
+                <option th:each="building : ${buildings}" th:value="${building.id}" th:text="${building.name}"></option>
+            </select><br>
             <button type="submit">Add Room</button>
         </form>
         <a class="cancel" href="/room">Cancel</a>

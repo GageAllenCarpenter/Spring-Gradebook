@@ -29,7 +29,7 @@ public class BuildingController {
         return "Building/AddBuilding";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addBuilding(@ModelAttribute Building building) {
         buildingService.addBuilding(building);
         return "redirect:/building";

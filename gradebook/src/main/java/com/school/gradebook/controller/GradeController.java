@@ -1,6 +1,6 @@
 package com.school.gradebook.controller;
 
-import com.school.gradebook.controller.service.GradeService;
+import com.school.gradebook.controller.service.*;
 import com.school.gradebook.model.Grade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/grade")
 public class GradeController {
     private final GradeService gradeService;
+    private final AssignmentService assignmentService;
+    private final DivisionService divisionService;
+    private final StudentService studentService;
+    private final ProfessorService professorService;
     @Autowired
-    public GradeController(GradeService gradeService) {
+    public GradeController(
+            GradeService gradeService,
+            AssignmentService assignmentService,
+            DivisionService divisionService,
+            StudentService studentService,
+            ProfessorService professorService
+
+    ) {
         this.gradeService = gradeService;
+        this.assignmentService = assignmentService;
+        this.divisionService = divisionService;
+        this.studentService = studentService;
+        this.professorService = professorService;
     }
 
     @GetMapping
@@ -25,17 +40,35 @@ public class GradeController {
     @GetMapping("/add")
     public String showAddGradeForm(Model model) {
         model.addAttribute("grade", new Grade());
+        model.addAttribute("assignments", assignmentService.getAssignments());
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
+        model.addAttribute("professors", professorService.getProfessors());
         return "Grade/AddGrade";
     }
 
     @PostMapping("/add")
-    public String addGrade(@ModelAttribute Grade grade) {
+    public String addGrade(
+            @ModelAttribute Grade grade,
+            @RequestParam("assignmentId") Long assignmentId,
+            @RequestParam("divisionId") Long divisionId,
+            @RequestParam("studentId") Long studentId,
+            @RequestParam("professorId") Long professorId
+    ) {
+        grade.setAssignment(assignmentService.getAssignmentById(assignmentId));
+        grade.setDivision(divisionService.getDivisionById(divisionId));
+        grade.setStudent(studentService.getStudentById(studentId));
+        grade.setProfessor(professorService.getProfessorById(professorId));
         gradeService.addGrade(grade);
         return "redirect:/grade";
     }
 
     @GetMapping("/update")
-    public String showUpdateGradeForm() {
+    public String showUpdateGradeForm(Model model) {
+        model.addAttribute("assignments", assignmentService.getAssignments());
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
+        model.addAttribute("professors", professorService.getProfessors());
         return "Grade/UpdateGrade";
     }
 
@@ -43,6 +76,10 @@ public class GradeController {
     public String showUpdateGradeForm(@PathVariable Long id, Model model) {
         Grade grade = gradeService.getGradeById(id);
         model.addAttribute("grade", grade);
+        model.addAttribute("assignments", assignmentService.getAssignments());
+        model.addAttribute("divisions", divisionService.getDivisions());
+        model.addAttribute("students", studentService.getStudents());
+        model.addAttribute("professors", professorService.getProfessors());
         return "Grade/UpdateGrade";
     }
 

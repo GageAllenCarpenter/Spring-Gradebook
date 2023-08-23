@@ -32,7 +32,7 @@
         <p>Name: <span th:text="${course.name}"></span></p>
         <p>Description: <span th:text="${course.description}"></span></p>
         <p>Credit Hour: <span th:text="${course.creditHour}"></span></p>
-        <p>Professor: <span th:text="${course.professor.firstName} ${course.professor.lastName}"></span></p>
+        <p>Professor: <span th:text="${course.professor.firstName + ' ' + course.professor.lastName}"></span></p>
         <form th:action="@{/course/delete/{id}(id=${course.id})}" method="post">
             <button type="submit">Delete</button>
             <a class="cancel" th:href="@{/course}">Cancel</a>

@@ -27,25 +27,25 @@
     </header>
     <section>
         <h1>Update Division</h1>
-        <form th:action="@{/division/update/{id}(id=${division.id})}" method="post">
+        <form th:action="@{/division/update/{id}(id=${division.id})}" method="post" th:object="${division}">
             <label for="time">Time:</label>
-            <input type="text" id="time" name="time" th:value="${division.time}" required>
+            <input type="text" id="time" name="time" th:field="*{time}" required><br>
             <label for="professor">Professor:</label>
-            <select id="professor" name="professor" th:field="*{professor}" required>
-                <option th:each="professor : ${professors}" th:value="${professor}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
-            </select>
+            <select id="professor" name="professorId" th:field="*{professor.id}" required>
+                <option th:each="professor : ${professors}" th:value="${professor.id}" th:text="${professor.firstName + ' ' + professor.lastName}"></option>
+            </select><br>
             <label for="semester">Semester:</label>
-            <select id="semester" name="semester" th:field="*{semester}" required>
-                <option th:each="semester : ${semesters}" th:value="${semester}" th:text="${semester.startDate + ' - ' + semester.endDate}"></option>
-            </select>
+            <select id="semester" name="semesterId" th:field="*{semester.id}" required>
+                <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="${semester.startDate + ' - ' + semester.endDate}"></option>
+            </select><br>
             <label for="course">Course:</label>
-            <select id="course" name="course" th:field="*{course}" required>
-                <option th:each="course : ${courses}" th:value="${course}" th:text="${course.name}"></option>
-            </select>
+            <select id="course" name="courseId" th:field="*{course.id}" required>
+                <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.name}"></option>
+            </select><br>
             <label for="room">Room:</label>
-            <select id="room" name="room" th:field="*{room}" required>
-                <option th:each="room : ${rooms}" th:value="${room}" th:text="${room.building.name + ' - Room ' + room.id}"></option>
-            </select>
+            <select id="room" name="roomId" th:field="*{room.id}" required>
+                <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.building.name + ' - Room ' + room.id}"></option>
+            </select><br>
             <button type="submit">Update</button>
             <a class="cancel" th:href="@{/division}">Cancel</a>
         </form>

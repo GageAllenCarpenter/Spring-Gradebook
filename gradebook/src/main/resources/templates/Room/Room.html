@@ -38,7 +38,7 @@
             <tbody>
             <tr th:each="room : ${rooms}">
                 <td th:text="${room.id}"></td>
-                <td th:text="${room.building.name}"></td> <!-- Assuming the building has a 'name' property -->
+                <td th:text="${room.building.name}"></td>
                 <td>
                     <a th:href="@{/room/update/{id}(id=${room.id})}"><button class="update__btn">Update</button></a>
                     <a th:href="@{/room/delete/{id}(id=${room.id})}"><button class="del__btn">Delete</button></a>

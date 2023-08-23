@@ -44,7 +44,7 @@
                 <td th:text="${course.name}"></td>
                 <td th:text="${course.description}"></td>
                 <td th:text="${course.creditHour}"></td>
-                <td th:text="${course.professor}"></td>
+                <td th:text="${course.professor.firstName + ' ' + course.professor.lastName}"></td>
                 <td>
                     <a th:href="@{/course/update/{id}(id=${course.id})}"><button class="update__btn">Update</button></a>
                     <a th:href="@{/course/delete/{id}(id=${course.id})}"><button class="del__btn">Delete</button></a>

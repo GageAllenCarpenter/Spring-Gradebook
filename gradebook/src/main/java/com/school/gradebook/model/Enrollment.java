@@ -20,7 +20,7 @@ public class Enrollment {
     private Long id;
 
     @Column(name = "enrollDate")
-    private Date enrollDate;
+    private String enrollDate;
 
     @Column(name = "currentGrade")
     private int currentGrade;

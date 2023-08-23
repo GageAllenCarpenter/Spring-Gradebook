@@ -27,26 +27,27 @@
     </header>
     <section>
         <h1>Update Enrollment</h1>
-        <form th:action="@{/enrollment/update/{id}(id=${enrollment.id})}" method="post">
+        <form th:action="@{/enrollment/update/{id}(id=${enrollment.id})}" method="post" th:object="${enrollment}">
             <label for="enrollDate">Enroll Date:</label>
-            <input type="date" id="enrollDate" name="enrollDate" th:value="${#dates.format(enrollment.enrollDate, 'yyyy-MM-dd')}" required>
+            <input type="date" id="enrollDate" name="enrollDate" th:field="*{enrollDate}" required><br>
             <label for="currentGrade">Current Grade:</label>
-            <input type="number" id="currentGrade" name="currentGrade" th:value="${enrollment.currentGrade}" required>
+            <input type="number" id="currentGrade" name="currentGrade" th:field="*{currentGrade}" required><br>
             <label for="midtermGrade">Midterm Grade:</label>
-            <input type="number" id="midtermGrade" name="midtermGrade" th:value="${enrollment.midtermGrade}" required>
+            <input type="number" id="midtermGrade" name="midtermGrade" th:field="*{midtermGrade}" required><br>
             <label for="finalGrade">Final Grade:</label>
-            <input type="number" id="finalGrade" name="finalGrade" th:value="${enrollment.finalGrade}" required>
+            <input type="number" id="finalGrade" name="finalGrade" th:field="*{finalGrade}" required><br>
             <label for="division">Division:</label>
-            <select id="division" name="division" th:field="*{division}" required>
-                <option th:each="division : ${divisions}" th:value="${division}" th:text="${division.course.name + ' - ' + division.professor.firstName + ' ' + division.professor.lastName}"></option>
-            </select>
+            <select id="division" name="divisionId" th:field="*{division.id}" required>
+                <option th:each="division : ${divisions}" th:value="${division.id}" th:text="${division.course.name + ' - ' + division.professor.firstName + ' ' + division.professor.lastName}"></option>
+            </select><br>
             <label for="student">Student:</label>
-            <select id="student" name="student" th:field="*{student}" required>
-                <option th:each="student : ${students}" th:value="${student}" th:text="${student.firstName + ' ' + student.lastName}"></option>
-            </select>
+            <select id="student" name="studentId" th:field="*{student.id}" required>
+                <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"></option>
+            </select><br>
             <button type="submit">Update</button>
             <a class="cancel" th:href="@{/enrollment}">Cancel</a>
         </form>
     </section>
+
 </body>
 </html>

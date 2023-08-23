@@ -1,6 +1,7 @@
 package com.school.gradebook.controller;
 
 import com.school.gradebook.controller.service.CourseService;
+import com.school.gradebook.controller.service.ProfessorService;
 import com.school.gradebook.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class CourseController {
 
     private final CourseService courseService;
+    private final ProfessorService professorService;
+
     @Autowired
-    public CourseController(CourseService courseService) {
+    public CourseController(
+            CourseService courseService,
+            ProfessorService professorService
+    ) {
         this.courseService = courseService;
+        this.professorService = professorService;
     }
 
     @GetMapping
@@ -26,17 +33,23 @@ public class CourseController {
     @GetMapping("/add")
     public String showAddCourseForm(Model model) {
         model.addAttribute("course", new Course());
+        model.addAttribute("professors", professorService.getProfessors());
         return "Course/AddCourse";
     }
 
     @PostMapping("/add")
-    public String addCourse(@ModelAttribute Course course) {
+    public String addCourse(
+            @ModelAttribute("course") Course course,
+            @RequestParam("professorId") Long professorId
+    ) {
+        course.setProfessor(professorService.getProfessorById(professorId));
         courseService.addCourse(course);
         return "redirect:/course";
     }
 
     @GetMapping("/update")
-    public String showUpdateCourseForm() {
+    public String showUpdateCourseForm(Model model) {
+        model.addAttribute("professors", professorService.getProfessors());
         return "Course/UpdateCourse";
     }
 
@@ -44,6 +57,7 @@ public class CourseController {
     public String showUpdateCourseForm(@PathVariable Long id, Model model) {
         Course course = courseService.getCourseById(id);
         model.addAttribute("course", course);
+        model.addAttribute("professors", professorService.getProfessors());
         return "Course/UpdateCourse";
     }
 
