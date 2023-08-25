@@ -1,6 +1,7 @@
 
 # Spring Gradebook Application
 [![License](https://img.shields.io/github/license/GageAllenCarpenter/Spring-Gradebook)](https://github.com/GageAllenCarpenter/Spring-Gradebook/blob/main/LICENSE) [![GitHub Issues](https://img.shields.io/github/issues/GageAllenCarpenter/Spring-Gradebook)](https://github.com/GageAllenCarpenter/Spring-Gradebook/issues)
+
 The Spring Gradebook Application is a web-based system designed to manage student grades, courses, professors, and other educational information. It's built using the Spring Framework and Hibernate for data persistence. The view was made using Thymeleaf.
 ## Features
 - Manage Professors: Add, view, update, and delete professor details including their name, email, and contact information. 
